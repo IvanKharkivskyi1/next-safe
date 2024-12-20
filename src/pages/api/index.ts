@@ -1,1 +1,1 @@
-export * from './auth/[...nextauth]';
+export { default } from './auth/[...nextauth]';
