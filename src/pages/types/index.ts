@@ -1,8 +1,8 @@
-import { Session } from 'next-auth';
+// import { Session } from 'next-auth';
 
-interface CustomSession extends Session {
-  user: {
-    id: string;
-    email: string;
-  };
-}
+// interface CustomSession extends Session {
+//   user: {
+//     id: string;
+//     email: string;
+//   };
+// }

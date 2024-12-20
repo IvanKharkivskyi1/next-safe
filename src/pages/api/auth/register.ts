@@ -1,29 +1,24 @@
 import { PrismaClient } from '@prisma/client';
 import bcrypt from 'bcryptjs';
+import { NextApiRequest, NextApiResponse } from 'next';
 
 const prisma = new PrismaClient();
 
+interface RequestBody {
+  email: string;
+  password: string;
+}
+
 export default async function handler(
-  req: { method: string; body: { email: any; password: any } },
-  res: {
-    status: (arg0: number) => {
-      (): any;
-      new (): any;
-      json: {
-        (arg0: {
-          error?: string;
-          message?: string;
-          user?: { id: number; email: string; password: string };
-        }): any;
-        new (): any;
-      };
-      end: { (arg0: string): void; new (): any };
-    };
-    setHeader: (arg0: string, arg1: string[]) => void;
-  }
+  req: NextApiRequest,
+  res: NextApiResponse<{
+    error?: string;
+    message?: string;
+    user?: { id: number; email: string; password: string };
+  }>
 ) {
   if (req.method === 'POST') {
-    const { email, password } = req.body;
+    const { email, password } = req.body as RequestBody;
 
     if (!email || !password) {
       return res.status(400).json({ error: 'Email and password are required' });

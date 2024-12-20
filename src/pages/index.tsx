@@ -1,3 +1,4 @@
+import { GetServerSidePropsContext } from 'next';
 import { getSession, signOut } from 'next-auth/react';
 import { useRouter } from 'next/router';
 
@@ -8,7 +9,7 @@ interface CustomSession {
   };
 }
 
-export default function Home({ session }: { session: CustomSession }) {
+export default function Home({ session }: { session: CustomSession | null }) {
   const router = useRouter();
 
   if (!session) {
@@ -40,12 +41,12 @@ export default function Home({ session }: { session: CustomSession }) {
   );
 }
 
-export async function getServerSideProps(context: any) {
+export async function getServerSideProps(context: GetServerSidePropsContext) {
   const session = await getSession(context);
 
   return {
     props: {
-      session,
+      session: session as CustomSession | null,
     },
   };
 }
