@@ -19,7 +19,7 @@ export default function SignIn({ csrfToken }: { csrfToken: string | null }) {
         <button type="submit">Sign In</button>
       </form>
       <p>
-        Don't have an account? <Link href="/auth/register">Register here</Link>
+        Dont have an account? <Link href="/auth/register">Register here</Link>
       </p>
     </div>
   );
